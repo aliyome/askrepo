@@ -12,6 +12,7 @@ export interface Args {
   baseUrl: string;
   stream: boolean;
   verbose: boolean;
+  print: boolean;
 }
 
 /**
@@ -105,7 +106,7 @@ async function getContentFromFiles(
 async function main() {
   try {
     // Parse and validate arguments
-    const { basePaths, apiKey, prompt, model, baseUrl, stream, verbose } =
+    const { basePaths, apiKey, prompt, model, baseUrl, stream, verbose, print } =
       parseAndValidateArgs();
 
     // Validate paths
@@ -119,6 +120,11 @@ async function main() {
     const messages = [
       { role: "user", content: finalPrompt },
     ];
+
+    // Print prompt if requested
+    if (print) {
+      console.log(finalPrompt);
+    }
 
     // Call API and output results
     await callApiAndOutputResults(apiKey, messages, model, stream, baseUrl);

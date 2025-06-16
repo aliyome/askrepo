@@ -37,7 +37,7 @@ export function parseAndValidateArgs(): Args {
       "p",
       "u",
     ],
-    boolean: ["stream", "verbose", "s", "v"],
+    boolean: ["stream", "verbose", "s", "v",  "print"],
     alias: {
       b: "base_path",
       m: "model",
@@ -94,5 +94,6 @@ export function parseAndValidateArgs(): Args {
     baseUrl: args.base_url || defaults.baseUrl,
     stream: args.stream,
     verbose: args.verbose,
+    print: args.print || false,
   };
 }
