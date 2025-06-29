@@ -78,7 +78,7 @@ export function parseAndValidateArgs(): Args {
   let apiKey = args.api_key || "";
   if (!apiKey) {
     try {
-      apiKey = getApiKeyFromEnv();
+      // apiKey = getApiKeyFromEnv();
     } catch (error: unknown) {
       console.error(error instanceof Error ? error.message : String(error));
       Deno.exit(1);

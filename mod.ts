@@ -3,7 +3,7 @@
 import * as fileUtils from "./src/file_utils.ts";
 import * as googleApi from "./src/google_api.ts";
 import { parseAndValidateArgs } from "./src/cli/parseAndValidateArgs.ts";
-
+import $ from "@david/dax"; // "dax-sh" in Node
 export interface Args {
   basePaths: string[];
   apiKey: string;
@@ -120,8 +120,13 @@ async function main() {
       { role: "user", content: finalPrompt },
     ];
 
+    // Call gemini and output results
+    // const result = await $`gemini -p ${messages.map(x => x.content).join("\n")}`.text();
+    const result = await $`echo ${messages.map(x => x.content).join("\n")} | gemini `.text();
+    console.log(result);
+
     // Call API and output results
-    await callApiAndOutputResults(apiKey, messages, model, stream, baseUrl);
+    // await callApiAndOutputResults(apiKey, messages, model, stream, baseUrl);
   } catch (error: unknown) {
     console.error(error instanceof Error ? error.message : String(error));
     Deno.exit(1);
